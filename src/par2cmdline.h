@@ -167,7 +167,13 @@ typedef signed long long   i64;
 
 #include <errno.h>
 
-#define _MAX_PATH 4095
+#if defined (__OS2__)
+#define INCL_DOSFILEMGR
+#include <os2.h>
+#else
+ #define MAX_PATH 1024
+#endif
+
 
 #if HAVE_ENDIAN_H
 #  include <endian.h>
@@ -219,7 +225,8 @@ typedef   unsigned long long   u64;
 #endif
 #endif
 
-#ifdef WIN32
+//#ifdef WIN32
+#if defined(WIN32) || defined(__OS2__)
 #define PATHSEP "\\"
 #define ALTPATHSEP "/"
 #else
