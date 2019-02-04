@@ -653,7 +653,11 @@ void DiskFile::Close(void)
 string DiskFile::GetCanonicalPathname(string filename)
 {
   // Is the supplied path already an absolute one
+#ifndef __OS2__
   if (filename.size() == 0 || filename[0] == '/')
+#else
+  if (filename.size() == 0 || filename[0] == '/' || filename[0] == '\\' || filename[1] == ':')
+#endif
     return filename;
 
   // Get the current directory
