@@ -854,7 +854,7 @@ bool CommandLine::Parse(int argc, char *argv[])
   string lastchar = basepath.substr(basepath.length() -1);
   if ("/" != lastchar && "\\" != lastchar)
   {
-#ifdef WIN32
+#if defined(WIN32) || defined(__OS2__)
     basepath = basepath + "\\";
 #else
     basepath = basepath + "/";
